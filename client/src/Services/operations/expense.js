@@ -35,7 +35,7 @@ export const addExpense = async (data, token, id) => {
         result = response?.data;
     } catch (error) {
         console.log("Error occurred while adding expense:", error);
-        toast.error(error.message);
+        // toast.error(error.message);
     }
     toast.dismiss(toastId);
     return result;
@@ -59,7 +59,7 @@ export const updateExpense = async (data, token) => {
         result = response?.data;
     } catch (error) {
         console.log("Error occurred while updating expense:", error);
-        toast.error(error.message);
+        // toast.error(error.message);
     }
     toast.dismiss(toastId);
     return result;
@@ -81,7 +81,7 @@ export const deleteExpense = async (data, token) => {
         result = response?.data;
     } catch (error) {
         console.log("Error occurred while deleting expense:", error);
-        toast.error(error.message);
+        // toast.error(error.message);
     }
     toast.dismiss(toastId);
     return result;
@@ -102,7 +102,7 @@ export const viewExpense = async (data, token) => {
         result = response?.data;
     } catch (error) {
         console.log("Error occurred while fetching expense details:", error);
-        toast.error(error.message);
+        
     }
     //toast.dismiss(toastId);
     return result;
@@ -125,7 +125,7 @@ export const viewGroupDailyExpenses = async (data, token) => {
         result = response?.data;
     } catch (error) {
         console.log("Error occurred while fetching group daily expenses:", error);
-        toast.error(error.message);
+       
     }
     //toast.dismiss(toastId);
     return result;
@@ -147,7 +147,7 @@ export const viewGroupMonthlyExpenses = async (data, token) => {
         result = response?.data;
     } catch (error) {
         console.log("Error occurred while fetching group monthly expenses:", error);
-        toast.error(error.message);
+        // toast.error(error.message);
     }
     //toast.dismiss(toastId);
     return result;
@@ -168,7 +168,7 @@ export const groupTotalExpense = async (data, token) => {
         result = response?.data;
     } catch (error) {
         console.log("Error occurred while fetching group total expense:", error);
-        toast.error(error.message);
+        // toast.error(error.message);
     }
     //toast.dismiss(toastId);
     return result;
@@ -190,7 +190,7 @@ export const viewUserExpense = async (token) => {
         result = response?.data;
     } catch (error) {
         console.log("Error occurred while fetching user expenses:", error);
-        toast.error(error.message);
+        // toast.error(error.message);
     }
     //toast.dismiss(toastId);
     return result;
@@ -211,7 +211,7 @@ export const viewRecentUserExpense = async (data, token) => {
         result = response?.data;
     } catch (error) {
         console.log("Error occurred while fetching recent user expenses:", error);
-        toast.error(error.message);
+        // toast.error(error.message);
     }
     //toast.dismiss(toastId);
     return result;
@@ -232,7 +232,7 @@ export const viewUserMonthlyExpense = async (token) => {
         result = response?.data;
     } catch (error) {
         console.log("Error occurred while fetching user monthly expenses:", error);
-        toast.error(error.message);
+        // toast.error(error.message);
     }
     //toast.dismiss(toastId);
     return result;
@@ -253,7 +253,7 @@ export const viewUserDailyExpense = async (data, token) => {
         result = response?.data;
     } catch (error) {
         console.log("Error occurred while fetching user daily expenses:", error);
-        toast.error(error.message);
+        // toast.error(error.message);
     }
     //toast.dismiss(toastId);
     return result;
@@ -273,7 +273,7 @@ export const viewGroupRecentExpense = async (data, token) => {
         result = response?.data;
     } catch (error) {
         console.log("Error occurred while fetching group recent expenses:", error);
-        toast.error(error.message);
+        // toast.error(error.message);
     }
     //toast.dismiss(toastId);
     return result;
@@ -295,7 +295,7 @@ export const fetchGroupMembers = async (token, id) => {
       result = response?.data;
     } catch (error) {
       console.log("Error occurred while fetching group members:", error);
-      toast.error(error.message);
+    //   toast.error(error.message);
     }
     //toast.dismiss(toastId);
     return result;

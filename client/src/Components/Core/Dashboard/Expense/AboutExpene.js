@@ -21,8 +21,8 @@ function AboutExpene() {
   const date = formatDate(expense.createdAt)
   const {token} = useSelector((state) => state.auth)
   const {user} = useSelector((state) => state.profile)
-  const defaultValues = expense.expenseMembers.map((member)=>(member.email));
-
+  const defaultValues = expense.expenseMembers.map((member)=>({"email" : member.email}));
+  
   const expenseOwener = expense.expenseMembers.filter((member)=>(member._id==expense.expenseOwner));
   //console.log("Expnese owner : ", expenseOwener)
 

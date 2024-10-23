@@ -382,12 +382,12 @@ exports.viewGroupMonthlyExpenses = async (req, res) => {
             $sort : {"_id.month" : 1}
         }])
 
-        if(expenseData.length==0){
-            return res.status(400).json({
-                success : false,
-                message : "Expense data not found"
-            })
-        }
+        // if(expenseData.length==0){
+        //     return res.status(400).json({
+        //         success : false,
+        //         message : "Expense data not found"
+        //     })
+        // }
         
 
         return res.status(200).json({
@@ -633,12 +633,12 @@ exports.viewUserDailyExpense = async(req, res) => {
                 }
             }
         }])
-        if(expenseData.length==0){
-            return res.status(400).json({
-                success : false,
-                message : "Expense data not found"
-            })
-        }
+        // if(expenseData.length==0){
+        //     return res.status(400).json({
+        //         success : false,
+        //         message : "Expense data not found"
+        //     })
+        // }
 
         return res.status(200).json({
             success : true,

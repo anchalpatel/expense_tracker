@@ -11,7 +11,6 @@ function CreateGroupModal({setOpenModal}) {
     const [loading, setLoading] = useState(true);
     const user = useSelector((state) => state.profile);
     const userEmail = user.user.email
-    console.log("Printing user : ", userEmail);
     const {
         register,
         handleSubmit,
@@ -24,16 +23,23 @@ function CreateGroupModal({setOpenModal}) {
     const submitHandler = async (data) => {
         const toastId = toast.loading('Loading...', { autoClose: false }); 
         //toast.loading("Loading....");
+    
         const formData = new FormData();
         formData.append("groupName", data.groupName);
         formData.append("groupDescription", data.groupDescription);
         formData.append("groupImage", data.groupImage);
-        formData.append("groupMembers", data.groupMembers);
+        let groupMembersEmails = "";
+        data.groupMembers.map((member) => {
+            groupMembersEmails += member.email;
+            groupMembersEmails += ","
+        });
+        groupMembersEmails = groupMembersEmails.slice(0, -1)
+        console.log("GROUP MEMBERAS EMAILS----------->", groupMembersEmails)
+        formData.append("groupMembers", groupMembersEmails)
         formData.append("groupCurrency", "INR")
         formData.append("groupType", "Group");    
         setLoading(true);
-        console.log("BEFORE add course API call");
-        console.log("PRINTING FORMDATA", formData);
+        
         const result = await createGroup(formData,token);
         console.log("Printing result : ", result);
         if(result) {

@@ -10,8 +10,8 @@ const mailSender = require("../utils/mailSender");
 exports.createGroup = async (req, res) => {
     try {
         const { groupName, groupDescription, groupMembers, groupType } = req.body;
+        console.log("Group Members ---->", groupMembers)
         const groupOwner = req.user.id;
-       console.log("Re quest Body : ", req.body);
         const groupOwnerId = await User.findById(groupOwner);
           // Extract the email of the group owner
           if(!groupOwnerId){
@@ -191,7 +191,7 @@ exports.updateGroup = async (req, res) => {
 exports.viewGroup = async (req, res) => {
     try {
         const {groupId}  = req.body;
-        console.log("Group Data: ", req.body);
+        //console.log("Group Data: ", req.body);
         const group = await Group.findById(groupId).populate("groupMembers");
         if (!group) {
             return res.status(400).json({

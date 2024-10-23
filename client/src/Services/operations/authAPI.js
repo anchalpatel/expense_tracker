@@ -106,9 +106,10 @@ const {
           ? response.data?.user?.image
           : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`
         dispatch(setUser({ ...response.data.user, image: userImage }))
-        
+        const expiresAt = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
         localStorage.setItem("expenseToken", JSON.stringify(response.data.token))
         localStorage.setItem("expenseUser", JSON.stringify(response.data.user))
+        localStorage.setItem("expiresAt", expiresAt)
         dispatch(setLoading(false));
         navigate("/dashboard/aboutUser")
       } catch (error) {

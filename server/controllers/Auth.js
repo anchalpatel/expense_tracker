@@ -288,7 +288,7 @@ exports.changePassword = async (req, res) => {
 exports.viewUser = async (req,res) => {
 	try {
         const { userId } = req.body;
-        console.log("User Data: ", req.body);
+       // console.log("User Data: ", req.body);
         const user = await User.findById(userId);
         if (!user) {
             return res.status(400).json({
