@@ -10,14 +10,14 @@ exports.contactUsController = async (req, res) => {
       "Your Data send successfully",
       contactUsEmail(email, firstname, lastname, message, phoneNo)
     )
-    console.log("Email Res ", emailRes)
+    //console.log("Email Res ", emailRes)
     return res.json({
       success: true,
       message: "Email send successfully",
     })
   } catch (error) {
-    console.log("Error", error)
-    console.log("Error message :", error.message)
+    // console.log("Error", error)
+    // console.log("Error message :", error.message)
     return res.json({
       success: false,
       message: "Something went wrong...",

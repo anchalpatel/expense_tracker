@@ -13,8 +13,8 @@ function AboutUser() {
   const {isGrpReq, token} = useSelector((state) => state.auth);
   //const {user} = useSelector((state) => state.profile);
   const {groupId} = useSelector((state) => state.group);
-  console.log("group Request", isGrpReq);
-  console.log("Id", groupId);
+  // console.log("group Request", isGrpReq);
+  // console.log("Id", groupId);
   const dispatch = useDispatch();
   const joinGroupWithConfirmation = async() => {
     try {
@@ -22,11 +22,11 @@ function AboutUser() {
         groupId : groupId
       };
       const req = await addMemberConfirmation(data, token);
-      console.log("Request printing for add member with confirmation : ", req);
+      //console.log("Request printing for add member with confirmation : ", req);
       setOpenReqModal(null);
       dispatch(setIsGrpReq(false));
     } catch (error) {
-      console.log("error occured while adding member with confirmation", error.message);
+      //console.log("error occured while adding member with confirmation", error.message);
     }
   }
   useEffect(()=> {

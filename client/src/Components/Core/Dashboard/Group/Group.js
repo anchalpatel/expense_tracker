@@ -16,7 +16,7 @@ function Group() {
   const getUserGroups = async() => {
     try {
       const res = await viewUserGroup(token);
-      console.log("User groups : ", res);
+      //console.log("User groups : ", res);
       setGroups(res.data);
     } catch (error) {
       console.error("Error occured while fetching groups : ", error);

@@ -6,12 +6,12 @@ const User = require("../models/User");
 exports.auth = async (req, res, next) => {
     try{
 
-        console.log("BEFORE TOKEN EXTRACTION");
+        //console.log("BEFORE TOKEN EXTRACTION");
         //extract token
         const token = req.cookies.token 
                         || req.body.token 
                         || req.header("Authorization").replace("Bearer ", "");
-        console.log("AFTER TOKEN EXTRACTION");
+        //console.log("AFTER TOKEN EXTRACTION");
 
         //if token missing, then return response
         if(!token) {
@@ -24,7 +24,7 @@ exports.auth = async (req, res, next) => {
         //verify the token
         try{
             const decode =  jwt.verify(token, process.env.JWT_SECRET);
-            console.log(decode);
+            //console.log(decode);
             req.user = decode;
         }
         catch(err) {

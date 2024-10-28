@@ -16,12 +16,15 @@ import CreateExpenseModal from './Modals/CreateExpenseModal';
 import { viewGroup } from '../../../../Services/operations/group';
 import { formatDate } from '../../../../Utils/DateFormatter';
 import { setGroupData } from '../../../../Reducer/Slices/groupSlice';
+//import _ from 'lodash';
+
+
 function AboutGroup() {
   const {token} = useSelector((state) => state.auth);
   let {id} = useParams();
   id = id.substring(1);
-  const [recentExpenses, setRecentExpenses] = useState([]);
-  const [monthlyExoenseData, setMonthlyexpenseData] = useState([]);
+  const [recentExpenses, setRecentExpense] = useState([]);
+  const [monthlyExpenseData, setMonthlyExpenseData] = useState([]);
   const [dailyExpenseData, setDailyExpenseData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [addExpenseModal, setAddExpenseModal] = useState(false);
@@ -42,18 +45,27 @@ function AboutGroup() {
     const toastId = toast.loading("Loading....");
     setLoading(true);
     try {
-      const [groupRes, recentExpenses, dailyExpense, monthlyExpense] = await Promise.all([
+      const [groupRes, recentExpensesData, dailyExpense, monthlyExpense] = await Promise.all([
         viewGroup({groupId : id}),
         viewGroupRecentExpense({groupId : id}, token),
         viewGroupDailyExpenses({groupId : id}, token),
         viewGroupMonthlyExpenses({groupId : id}, token)
       ])
-      
-      setGroup(groupRes.group)
-      setGroupOwner(group.groupMembers.filter((member)=>member._id == group.groupOwner))
-      setRecentExpenses(recentExpenses.data)
-      setDailyExpenseData(dailyExpense.data)
-      setMonthlyexpenseData(monthlyExpense.data)
+      const groupTemp = groupRes.group;
+      const recentExpenseTemp = recentExpensesData;
+      const dailyExoensetemp = dailyExpense.data;
+      const monthlyExpenseTemp = monthlyExpense.data;
+
+      setGroup(groupTemp);
+      setRecentExpense(recentExpenseTemp.data);
+      setDailyExpenseData(dailyExoensetemp);
+      setMonthlyExpenseData(monthlyExpenseTemp);
+      //console.log("PRINTING RECENT EXPENSES", recentExpenses);
+      const owner = group.groupMembers.find(
+        (member) => member._id === group.groupOwner
+      );
+      setGroupOwner(owner)
+      //console.log("PRINTING GROUP OWNER DETAILS : ", groupOwner)
     } catch (error) {
       console.log("Error occured while fetching data for about group page", error)
     }
@@ -62,10 +74,14 @@ function AboutGroup() {
       setLoading(false);
     }
   }
-  useEffect(()=>{
+  
+
+  useEffect(() => {
     fetchData();
-  },[addExpenseModal, addMemberModal])  
-  if(!group){
+    //console.log("This Page--->", group, recentExpenses, monthlyExpenseData, dailyExpenseData)
+  }, [addExpenseModal, addMemberModal]);
+ 
+  if(!group || loading){
     return <div className='h-[calc(70vh-1rem)] flex justify-center items-center'>
       <div className='loader'></div>
     </div>
@@ -102,12 +118,12 @@ function AboutGroup() {
           <div className='flex gap-5 flex-col md:flex-row justify-start'>
           <div className='md:w-[65%] flex flex-col gap-5'>
               <ViewGroupDailyExpense groupId={id} expenseData={dailyExpenseData}></ViewGroupDailyExpense>
-              <GroupMonthlyExpenseGraph groupId={id} expenseData={monthlyExoenseData}></GroupMonthlyExpenseGraph>
+              <GroupMonthlyExpenseGraph groupId={id} expenseData={monthlyExpenseData}></GroupMonthlyExpenseGraph>
           </div> 
 
           <div className='flex flex-col gap-5'>
               <div className='flex flex-col gap-3 border text-white border-gray-500 h-[22rem] overflow-y-auto rounded-md px-7 py-5 scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-500'>
-                {groupOwner && <div>Owner : {groupOwner[0].firstName}  {groupOwner[0].lastName} </div>}
+                {groupOwner && <div>Owner : {groupOwner?.firstName}  {groupOwner?.lastName} </div>}
                 <div>Created On : {formatDate(group.createdAt)}</div>
                 <div>Group Total : {group.groupTotal}</div>
                 <div>Description : {group.groupDescription}</div>

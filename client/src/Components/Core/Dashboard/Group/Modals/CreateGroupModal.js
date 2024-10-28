@@ -34,23 +34,23 @@ function CreateGroupModal({setOpenModal}) {
             groupMembersEmails += ","
         });
         groupMembersEmails = groupMembersEmails.slice(0, -1)
-        console.log("GROUP MEMBERAS EMAILS----------->", groupMembersEmails)
+        //console.log("GROUP MEMBERAS EMAILS----------->", groupMembersEmails)
         formData.append("groupMembers", groupMembersEmails)
         formData.append("groupCurrency", "INR")
         formData.append("groupType", "Group");    
         setLoading(true);
         
         const result = await createGroup(formData,token);
-        console.log("Printing result : ", result);
+        //console.log("Printing result : ", result);
         if(result) {
-            console.log("Group : ", result);
+            //console.log("Group : ", result);
             toast.error("Error occurred while creating group");
       }
         setOpenModal(false);
         setLoading(false);
         toast.dismiss(toastId);
-        console.log("PRINTING FORMDATA", formData);
-        console.log("PRINTING result", result);
+        // console.log("PRINTING FORMDATA", formData);
+        // console.log("PRINTING result", result);
     }
   return (
     <div className='fixed  inset-0 z-[1000] !mt-0 grid h-screen w-screen place-items-center overflow-auto bg-white bg-opacity-10 backdrop-blur-sm'>

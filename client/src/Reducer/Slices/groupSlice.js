@@ -23,7 +23,7 @@ const groupSlice = createSlice({
         },
         setGroupId : (state, action) => {
             state.groupId = action.payload
-            console.log("Group Id in slice", state.groupId);
+            //console.log("Group Id in slice", state.groupId);
         }
     },
 });

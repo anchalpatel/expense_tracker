@@ -7,7 +7,7 @@ ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, PointElemen
 
 
 function ViewGroupDailyExpense({groupId, expenseData}) {
-
+  //console.log('DAILY EXPENSE DATA : ', expenseData)
   const [loading, setLoading] = useState(false);
   const dataPoints = expenseData.map((item) => ({
     x: new Date(item._id.year, item._id.month - 1, item._id.date),

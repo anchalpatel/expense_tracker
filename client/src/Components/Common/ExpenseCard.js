@@ -11,7 +11,7 @@ function ExpenseCard({expense}) {
     const navigate = useNavigate();
     const clickHandler = () => {
         dispatch(setExpense(expense));
-        console.log("Inside onClick listener");
+        //console.log("Inside onClick listener");
         navigate(`/dashboard/aboutExpense/${expense._id}`);
     }
   return (

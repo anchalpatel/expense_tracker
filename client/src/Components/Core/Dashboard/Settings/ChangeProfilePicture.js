@@ -9,7 +9,7 @@ export default function ChangeProfilePicture() {
   const { token } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
-  console.log("Printing user : ", user)
+  //console.log("Printing user : ", user)
 
   const [loading, setLoading] = useState(false);
   const [imageFile, setImageFile] = useState(null);
@@ -46,7 +46,7 @@ export default function ChangeProfilePicture() {
         setLoading(false);
       });
     } catch (error) {
-      console.log("ERROR MESSAGE - ", error.message);
+      //console.log("ERROR MESSAGE - ", error.message);
     }
   };
 

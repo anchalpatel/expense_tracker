@@ -22,7 +22,7 @@ function ViewGroupMember() {
         setGroupData(result.group); 
       }
     } catch (error) {
-      console.error('Error fetching group data:', error);
+     // console.error('Error fetching group data:', error);
       toast.error("Error fetching data");
     } finally {
       setLoading(false);

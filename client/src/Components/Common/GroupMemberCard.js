@@ -4,7 +4,7 @@ function GroupMemberCard({member}) {
   return (
     <div className='flex gap-5 text-[15px] text-white-100'>
       <div>
-        <img src={member.profileImage} className='w-[3rem] aspect-square rounded-full'></img>
+        <img src={member.profileImage} className='w-[44px] apect-square rounded-full'></img>
       </div>
       <div>
         <div className='flex gap-1'>

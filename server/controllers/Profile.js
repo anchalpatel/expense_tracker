@@ -45,7 +45,7 @@ exports.updateProfile = async (req, res) => {
 exports.deleteAccount = async (req, res) => {
 	try {
 		
-		console.log("Printing ID: ", req.user.id);
+		//console.log("Printing ID: ", req.user.id);
 		const id = req.user.id;
 		
 		const user = await User.findById({ _id: id });
@@ -83,7 +83,7 @@ exports.updateDisplayPicture = async (req, res) => {
         );
 
         // Update user's profile image in the database
-        console.log(image.secure_url)
+        //console.log(image.secure_url)
         const updatedProfile = await User.findByIdAndUpdate(
             userId,
             { profileImage: image.secure_url }, // Update profile image field
@@ -110,7 +110,7 @@ exports.getAllUserDetails = async (req, res) => {
 		const id = req.user.id;
 		const userDetails = await User.findById(id)
 			.exec();
-		console.log(userDetails);
+		//console.log(userDetails);
 		res.status(200).json({
 			success: true,
 			message: "User Data fetched successfully",

@@ -12,12 +12,12 @@ function SignupForm() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const isGrpReq = useParams('isGrpReq');
-  console.log("isGrpReq123",isGrpReq.isGrpReq);
+  //console.log("isGrpReq123",isGrpReq.isGrpReq);
   if(isGrpReq.isGrpReq!=null){
     dispatch(setIsGrpReq(true));
   }
   const groupId = useParams('groupId');
-  console.log("isGrpReq",groupId);
+  //console.log("isGrpReq",groupId);
   if(isGrpReq.groupId!=null){
     dispatch(setGroupId(isGrpReq.groupId));
   }

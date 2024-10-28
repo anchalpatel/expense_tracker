@@ -25,7 +25,7 @@ function DailyUserExpenseGraph() {
                     y: item.totalExpense,
                 }));
             } catch (error) {
-                console.log("Error occurred in fetching user daily expense data: ", error);
+                //console.log("Error occurred in fetching user daily expense data: ", error);
                 setLoading(false);
             }
         };

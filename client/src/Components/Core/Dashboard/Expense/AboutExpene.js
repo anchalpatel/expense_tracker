@@ -17,7 +17,7 @@ function AboutExpene() {
   } = useForm();
   const {expense} = useSelector((state) => state.expense);
   //
-  console.log("Expense in about expense : ", expense)
+  //console.log("Expense in about expense : ", expense)
   const date = formatDate(expense.createdAt)
   const {token} = useSelector((state) => state.auth)
   const {user} = useSelector((state) => state.profile)
@@ -49,8 +49,7 @@ function AboutExpene() {
       return false
     }  
   }
-  const submitHandler = async(data) => {
-    console.log("here");
+  const submitHandler = async(data) => {      
     if(user._id !== expense.expenseOwener._id){
       toast.alert("Only owner can change the expense details")
     }
@@ -66,12 +65,12 @@ function AboutExpene() {
       formData.append('expenseTo', JSON.stringify(uniqueEmailArray)) 
       formData.append('expenseType', data.expenseType)
       formData.append("groupId", expense.groupId._id);
-      console.log('Form Data : ', formData);
+      // console.log('Form Data : ', formData);
       try {
         const res = await updateExpense(formData, token);
-        console.log("Update expense response", res)
+        //console.log("Update expense response", res)
       } catch (error) {
-        console.error("Error occured while updating expense", error.message)
+        //console.error("Error occured while updating expense", error.message)
       }
     }else{
       const toastId = toast.error("No changes are made");

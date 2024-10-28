@@ -26,7 +26,7 @@ function CreateExpenseModal({setAddExpenseModal, groupMembers}) {
     });
     const selectedMembers = watch('expenseTo')
     const submitHandler = async (data) => {
-        console.log("Printing data : ", selectedMembers)
+        //console.log("Printing data : ", selectedMembers)
         const toastId = toast.loading('Loading...', { autoClose: false });
         const formData = new FormData();
     
@@ -39,12 +39,12 @@ function CreateExpenseModal({setAddExpenseModal, groupMembers}) {
         // Append expenseTo as an array
     
         setLoading(true); 
-        for (let [key, value] of formData.entries()) {
-            console.log(`${key}: ${value}`);
-        }
+        // for (let [key, value] of formData.entries()) {
+        //     console.log(`${key}: ${value}`);
+        // }
 
         const result = await addExpense(formData, token, id);
-        console.log("Printing  result :", result);
+        //console.log("Printing  result :", result);
         if (!result) {
             toast.error("Error occurred while adding Expense");
         } else {

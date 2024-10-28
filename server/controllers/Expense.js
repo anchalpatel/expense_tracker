@@ -23,9 +23,9 @@ exports.addExpense = async (req, res) => {
             });
         }
 
-        console.log("Expense to 1 : ", typeof(expenseTo));
+        //console.log("Expense to 1 : ", typeof(expenseTo));
         expenseTo = expenseTo.split(',');
-        console.log("Expense to 2 : ", expenseTo);
+        //console.log("Expense to 2 : ", expenseTo);
         if (expenseTo.length == 1 && expenseFrom === expenseTo[0]) {
             return res.status(400).json({
                 success: false,
@@ -60,9 +60,9 @@ exports.addExpense = async (req, res) => {
         for (let member of expenseTo) {
             const email = Array.isArray(member) ? member[0] : member;
             if (email !== owner.email) {
-                console.log("Member email : ", email);
+                //console.log("Member email : ", email);
                 const memberSplit = await User.findOne({ email: email });
-                console.log("Member : ", memberSplit);
+                //console.log("Member : ", memberSplit);
                 if (!memberSplit) {
                     return res.status(400).json({
                         success: false,
@@ -93,9 +93,7 @@ exports.addExpense = async (req, res) => {
         };
 
         const expense = await Expense.create(expenseObj);
-        console.log("Here");
         const updateGroup = await addSplit(groupId, owner._id, membersTo, expenseAmount);
-        console.log("Here");
         
         return res.status(200).json({
             success: true,
@@ -122,11 +120,10 @@ exports.addExpense = async (req, res) => {
 exports.editExpense = async (req, res) => {
     const release = await mutex.acquire(); // Acquire the mutex
     try {
-        console.log("body of edit expense", req.body)
         const {expenseId, expenseName, expenseDescription, groupId, expenseAmount, expenseType} = req.body;
         const expenseFrom = req.user.id;
         const expenseTo = JSON.parse(req.body.expenseTo)
-        console.log("expense Memebrs", typeof(expenseTo))
+        //console.log("expense Memebrs", typeof(expenseTo))
         if(!expenseId || !expenseFrom || !groupId || !expenseTo || !expenseAmount){
             return res.status(400).json({
                 success : false,
@@ -156,7 +153,7 @@ exports.editExpense = async (req, res) => {
         }
         let memberTo = [];
         let updateGroup = await clearSplit(groupId, oldExpense.expenseOwner, oldExpense.expenseMembers, oldExpense.expenseAmount);
-        console.log("Removed split : ", updateGroup);
+        //console.log("Removed split : ", updateGroup);
         if(!group.groupMembers.includes(owner._id)){
             return res.status(400).json({
                 success : false,
@@ -200,7 +197,7 @@ exports.editExpense = async (req, res) => {
                 expenseType : expenseType
             }
         }, {new : true});
-        console.log("Members to : ", memberTo);
+        //console.log("Members to : ", memberTo);
         updateGroup = await addSplit(groupId, owner._id, memberTo, expenseAmount);
         return res.status(200).json({
             success : true,
@@ -241,7 +238,7 @@ exports.deleteExpense = async (req, res) => {
             });
         }
         await Expense.findByIdAndDelete(expenseId);
-        console.log("Expense : ", expense.expenseOwner, expense.expenseMembers); 
+        //console.log("Expense : ", expense.expenseOwner, expense.expenseMembers); 
         const updatedGroup = await clearSplit(expense.groupId, expense.expenseOwner, expense.expenseMembers, expense.expenseAmount);
         return res.status(200).json({
             success : true,
@@ -264,7 +261,7 @@ exports.deleteExpense = async (req, res) => {
 exports.viewExpense = async(req, res) => {
     try {
         const expenseId = req.body.expenseId;
-        console.log(expenseId)
+        //console.log(expenseId)
         if(!expenseId){
             return res.status(400).json({
                 success : false,
@@ -443,7 +440,7 @@ exports.groupTotalExpense = async (req, res) => {
 exports.viewGroupRecentExpense = async(req, res) => {
     try {
         const {groupId} = req.body;
-        console.log("request", req);
+        //console.log("request", req);
         const groupRecentExpense = await Expense.find({groupId:groupId}).sort({createdAt : -1}).limit(5).populate('expenseMembers').populate('groupId').exec();
         if(groupRecentExpense.length==0){
             return res.status(400).json({
@@ -539,7 +536,7 @@ exports.viewRecentUserExpenses = async(req, res) => {
     }
 }
 exports.viewUserMonthlyExpense = async(req, res) => {
-    console.log('Controller function is called');
+    //console.log('Controller function is called');
     try {
         const userId = req.user.id;
         const userData = await User.findById(userId);
@@ -597,7 +594,7 @@ exports.viewUserMonthlyExpense = async(req, res) => {
 }
 exports.viewUserDailyExpense = async(req, res) => {
     try {
-        console.log(req.body);
+        //console.log(req.body);
         const userId = req.user.id;
         const userData = await User.findById(userId);
         const objectUserId = new ObjectId(userId);

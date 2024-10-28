@@ -1,4 +1,5 @@
 export function formatDate(dateString) {
+  //console.log("PRINTING DATE : ", dateString)
     const date = new Date(dateString);
     const options = {
       year: 'numeric',

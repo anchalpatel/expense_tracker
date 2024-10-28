@@ -41,7 +41,7 @@ function AddMemberModal({groupMembers, setAddMemberModal, groupName, id}) {
       const member = data.groupMembers[i];
       
       if (membersEmails.includes(member)) {
-        console.log("here")
+
         data.groupMembers.splice(i, 1); // Remove the duplicate member
         i--;
       }
@@ -52,8 +52,9 @@ function AddMemberModal({groupMembers, setAddMemberModal, groupName, id}) {
       setMessge("You have not added any new member yet");
       return;
     }
-    console.log("Memeber in data : ", data.groupMembers)
+    //console.log("Memeber in data : ", data.groupMembers)
     setLoading(true);
+    //console.log("PRINTING GROUP MEMBER OBJECT : ", data.groupMembers)
     addMember(data.groupMembers);
     setLoading(false);
   }

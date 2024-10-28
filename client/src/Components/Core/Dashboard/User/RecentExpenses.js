@@ -14,7 +14,7 @@ function RecentExpenses() {
         // console.log("Recent expense : ", res);
         setEpenses(res?.data?.expenseData);
        } catch (error) {
-        console.log("Error occured while fetching user recent expenses");
+        //console.log("Error occured while fetching user recent expenses");
        }
     }
     useEffect(()=>{

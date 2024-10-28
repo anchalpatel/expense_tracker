@@ -14,8 +14,8 @@ export default function DeleteGroup() {
 
   async function handleDeleteAccount() {
     try {
-      console.log("Group Owner" ,group.groupOwner);
-      console.log("Group Owner" ,user._id);
+      // console.log("Group Owner" ,group.groupOwner);
+      // console.log("Group Owner" ,user._id);
       
       if (group.groupOwner === user._id) {
         dispatch(deleteGroup( id , user._id, user.token,navigate));

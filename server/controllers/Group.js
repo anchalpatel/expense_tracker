@@ -10,7 +10,7 @@ const mailSender = require("../utils/mailSender");
 exports.createGroup = async (req, res) => {
     try {
         const { groupName, groupDescription, groupMembers, groupType } = req.body;
-        console.log("Group Members ---->", groupMembers)
+        //console.log("Group Members ---->", groupMembers)
         const groupOwner = req.user.id;
         const groupOwnerId = await User.findById(groupOwner);
           // Extract the email of the group owner
@@ -25,10 +25,10 @@ exports.createGroup = async (req, res) => {
         if(!allGroupMembers.includes(groupOwnerId.email)){
             allGroupMembers = Array.from(new Set([...allGroupMembers, groupOwnerId.email]))
         }
-        console.log("All group Members", allGroupMembers);
+        //console.log("All group Members", allGroupMembers);
 
         let groupImage = `https://api.dicebear.com/5.x/initials/svg?seed=${groupName}`;
-        console.log("Files : ", req.files);
+        //console.log("Files : ", req.files);
         if (req.files && req.files.groupImage) {
             const image = req.files.groupImage;
             groupImage = await uploadImageToCloudinary(image, process.env.FOLDER_NAME, 1000, 1000);
@@ -44,7 +44,7 @@ exports.createGroup = async (req, res) => {
         const memberList = [];
         const notAddedMembers = [];
         for (let memberEmail of allGroupMembers) {
-            console.log("Email : ", memberEmail);
+            //console.log("Email : ", memberEmail);
             const user = await User.findOne({ email: memberEmail });
             if (!user) {
                 const confirmationTemplate = confirmationEmail(groupOwner, groupName, "http://gmail.com");
@@ -220,6 +220,7 @@ exports.viewGroup = async (req, res) => {
 exports.addMembers = async(req, res) => {
     try{
         const {groupMembers, groupId, link} = req.body;
+        console.log("PRINTING GROUP MEMBERS : ", groupMembers)
         const userId = req.user.id
         if(!groupMembers || !groupId){
             return res.status(400).json({
@@ -246,7 +247,7 @@ exports.addMembers = async(req, res) => {
         let notAddedMembaers = [];
 
         for(let memberEmail of groupMembers){
-            let user = await User.findOne({email : memberEmail});
+            let user = await User.findOne({email : memberEmail.email});
             if (!user) {
                 const confirmationTemplate = confirmationEmail(userRequested.firstName + " " + userRequested.lastName, group.groupName, link);
                 const mail = await mailSender(memberEmail, "Confirmation Email", confirmationTemplate);
@@ -276,7 +277,7 @@ exports.addMembers = async(req, res) => {
         console.error("Error While adding Members", error);
         return res.status(500).json({
             success: false,
-            message: "Error occurred while adding group members",
+            message: error.message,
             error: error.message
         });
     }
@@ -333,17 +334,17 @@ exports.deleteGroup = async(req, res) => {
     }
 }
 exports.addSplit = async (groupId, splitFrom, splitTo, expenseAmount) => {
-        console.log("Members list : ", splitTo)  
+        //console.log("Members list : ", splitTo)  
         expenseAmount = Number(expenseAmount);
         let group = await Group.findById(groupId);
         group.groupTotal += Number(expenseAmount);
         group.split[0][splitFrom] += Number(expenseAmount);
         let expensePerMember = expenseAmount/splitTo.length;
         expensePerMember = Math.round((expensePerMember  + Number.EPSILON) * 100) / 100;
-        console.log("Amount per peson : ", expensePerMember);
+        //console.log("Amount per peson : ", expensePerMember);
         for(let member of splitTo){ 
             group.split[0][member] -= expensePerMember;
-            console.log("Member Expense : ", group.split[0][member]);
+            //console.log("Member Expense : ", group.split[0][member]);
         }
         let balance = 0;
         for(let val of Object.entries(group.split[0])){
@@ -361,7 +362,7 @@ exports.addSplit = async (groupId, splitFrom, splitTo, expenseAmount) => {
 exports.clearSplit = async (groupId, splitFrom, splitTo, expenseAmount) => {
         let group = await Group.findById(groupId);
         expenseAmount = Number(expenseAmount);
-        console.log("Group Total before : ", group.groupTotal);
+        //console.log("Group Total before : ", group.groupTotal);
         group.groupTotal = group.groupTotal - Number(expenseAmount);
         group.split[0][splitFrom] -= Number(expenseAmount);
         

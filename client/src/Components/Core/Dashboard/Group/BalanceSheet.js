@@ -18,7 +18,7 @@ function BalanceSheet() {
         setLoading(true);
         const data = { groupId: id };
         const response = await balanceSheet(data, token);
-        console.log("Balance Sheet Data:", response.data);
+        //console.log("Balance Sheet Data:", response.data);
         setBalanceData(response.data);
       } catch (error) {
         setError(error.message);

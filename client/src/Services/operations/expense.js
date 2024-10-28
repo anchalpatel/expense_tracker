@@ -136,7 +136,7 @@ export const viewGroupMonthlyExpenses = async (data, token) => {
     let result = null;
     //const toastId = toast.loading("Loading...");
     try {
-        console.log("Token", token)
+        //console.log("Token", token)
         const response = await apiConnector("POST", VIEW_GROUP_MONTHLY_EXPENSE_API, data, {
             Authorization: `Bearer ${token}`,
         });

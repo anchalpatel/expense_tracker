@@ -24,7 +24,7 @@ const authSlice = createSlice({
       },
       setIsGrpReq(state, value){
         state.isGrpReq = value.payload;
-        console.log("Is Group Request in slice : ", state.isGrpReq);
+        //console.log("Is Group Request in slice : ", state.isGrpReq);
       }
     },
 });

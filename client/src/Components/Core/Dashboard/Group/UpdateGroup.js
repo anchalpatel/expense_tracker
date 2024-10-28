@@ -18,7 +18,7 @@ export default function UpdateGroup() {
   const dispatch = useDispatch();
   let { id } = useParams();
   
-  console.log("group data", group)
+  //console.log("group data", group)
   const {
     register,
     handleSubmit,
@@ -26,13 +26,13 @@ export default function UpdateGroup() {
   } = useForm();
 
   const submitGroupForm = async (data) => { 
-    console.log("Update Data", data)
+    //console.log("Update Data", data)
     if(data.groupName==group.groupName && data.groupDescription==group.groupDescription){
       toast.error("You have entered the same data")
     }
     else{
       try {
-        console.log(id)
+        //console.log(id)
         dispatch(updateGroup(token,data,id)); 
         
       } catch (error) {
